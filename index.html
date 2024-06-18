@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Greeting Components</title>
+    <script src="https://unpkg.com/react/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7bd120;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #root {
+            background: rgb(235, 48, 48);
+            padding: 40px;
+            border-radius: 10px 20px;
+            box-shadow: 4px 8px rgba(72, 3, 3, 0.618);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+        input {
+            padding: 15px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 3px solid #312a2a;
+            margin-bottom: 30px;
+            width: 90%;
+        }
+        h1 {
+            color: #fff;
+            font-size: 2.5em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Functional Component
+        const GreetingsFunctional = (props) => {
+            return <h1>Hello {props.name}!</h1>;
+        };
+
+        // Class Component
+        class GreetingsClass extends React.Component {
+            render() {
+                return <h1>Olaa {this.props.name}!</h1>;
+            }
+        }
+
+        // Main App Component
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { name: '' };
+            }
+
+            handleChange = (event) => {
+                this.setState({ name: event.target.value });
+            };
+
+            render() {
+                return (
+                    <div>
+                        <input 
+                            type="text" 
+                            placeholder="Tell me who are you greeting" 
+                            value={this.state.name} 
+                            onChange={this.handleChange} 
+                        />
+                        <GreetingsFunctional name={this.state.name} />
+                        <GreetingsClass name={this.state.name} />
+                    </div>
+                );
+            }
+        }
+
+        // Render App Component to the DOM
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
